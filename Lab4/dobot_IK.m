@@ -1,0 +1,72 @@
+%%Dobot kinematic in real-world system
+
+% Author: Yan-Ru (Patrick) Chen
+% Date: Sep. 1, 2026
+
+clear all clc
+
+% declare the vars
+% the length of each arms
+syms a1 a2 a3 b3 a4 a5 b5 
+% the angle of the joint in dobotlab
+syms J1 J2 J3 
+
+% define each theta with the joint angle (J1-J3)
+t0 = J1
+t1 = J2
+t2 = -J2
+t3 = J3 + J2 -J2
+t4 = -J3
+
+% given all the actual length
+a1_val = 0, a2_val = 150, a4_val = 150
+a3_val = 25, b3_val = 50 
+a5_val = 40,  b5_val = 30
+                
+
+% Forward kinematic
+H01 = [cos(t0) 0 -sin(t0) 0;...
+       sin(t0) 0 cos(t0)  0;...
+       0      -1    0     a1;...
+       0       0    0      1]
+H12= [cos(t1) -sin(t1) 0 a2*sin(t1);...
+      sin(t1)  cos(t1) 0 -a2*cos(t1);...
+      0         0      1    0;...
+      0         0      0    1]
+H23= [cos(t2) -sin(t2) 0 a3*sin(t2)+b3*cos(t2);...
+      sin(t2)  cos(t2) 0 -a3*cos(t2)+b3*sin(t2);...
+      0         0      1    0;...
+      0         0      0    1]
+H34= [cos(t3) -sin(t3) 0 a4*cos(t3);...
+      sin(t3)  cos(t3) 0 a4*sin(t3);...
+      0         0      1    0;...
+      0         0      0    1]
+H45= [cos(t4) -sin(t4) 0 a5*cos(t4)-b5*sin(t4);...
+      sin(t4)  cos(t4) 0 a5*sin(t4)+b5*cos(t4);...
+      0         0      1    0;...
+      0         0      0    1]
+H05 = simplify(H01*H12*H23*H34*H45)
+
+
+%Computing Forward Solution
+Px = H05(1,4) % 
+Py = H05(2,4) % 
+Pz = H05(3,4) % 
+
+
+% Computing IK Solution
+px_new = 307
+py_new = 6
+pz_new = 26
+
+Px_IK = subs(Px, [ a1, a2, a3, b3, a4, a5, b5],[a1_val, a2_val, a3_val, b3_val, a4_val, a5_val, b5_val])
+Py_IK = subs(Py, [ a1, a2, a3, b3, a4, a5, b5],[a1_val, a2_val, a3_val, b3_val, a4_val, a5_val, b5_val])
+Pz_IK = subs(Pz, [ a1, a2, a3, b3, a4, a5, b5],[a1_val, a2_val, a3_val, b3_val, a4_val, a5_val, b5_val])
+[t0,t1,t2] = solve(Px_IK==px_new,Py_IK==py_new,Pz_IK==pz_new,J1,J2,J3)
+
+Theta1=vpa((t0)*180/pi)
+Theta2=vpa((t1)*180/pi)
+Theta3=vpa((t2)*180/pi)
+
+Solution=[Theta1 Theta2 Theta3]
+
