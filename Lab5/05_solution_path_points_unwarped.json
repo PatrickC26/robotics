@@ -1,0 +1,97 @@
+{
+  "source_corners_json": "/home/patrick/Downloads/midterm-2-starter-code/Mid_Term_2_Starter_Code/part_2_maze_solution/01_camera_capture_corners.json",
+  "source_path_json": "/home/patrick/Downloads/midterm-2-starter-code/Mid_Term_2_Starter_Code/part_2_maze_solution/04_solution_path_points.json",
+  "original_image": "/home/patrick/Downloads/midterm-2-starter-code/Mid_Term_2_Starter_Code/part_2_maze_solution/01_camera_capture.png",
+  "warped_image": "/home/patrick/Downloads/midterm-2-starter-code/Mid_Term_2_Starter_Code/part_2_maze_solution/02_maze_warp.png",
+  "unwarped_path_pixels": [
+    [
+      367,
+      351
+    ],
+    [
+      368,
+      347
+    ],
+    [
+      343,
+      348
+    ],
+    [
+      317,
+      349
+    ],
+    [
+      292,
+      351
+    ],
+    [
+      267,
+      352
+    ],
+    [
+      242,
+      353
+    ],
+    [
+      218,
+      354
+    ],
+    [
+      216,
+      329
+    ],
+    [
+      214,
+      304
+    ],
+    [
+      212,
+      279
+    ],
+    [
+      211,
+      254
+    ],
+    [
+      209,
+      229
+    ],
+    [
+      207,
+      205
+    ],
+    [
+      205,
+      180
+    ],
+    [
+      204,
+      155
+    ],
+    [
+      202,
+      130
+    ],
+    [
+      200,
+      105
+    ],
+    [
+      225,
+      104
+    ],
+    [
+      250,
+      102
+    ],
+    [
+      274,
+      101
+    ],
+    [
+      265,
+      108
+    ]
+  ],
+  "notes": "Polyline points are in ORIGINAL image pixel coordinates. Start and end included if present in input."
+}
